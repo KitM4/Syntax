@@ -1,12 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Syntax.Domain.Models.Interfaces;
 
-namespace Syntax.Domain.Models.Actions
+namespace Syntax.Domain.Models.Actions;
+
+public class Like
 {
-    internal class Like
-    {
-    }
+    public required Guid Id { get; set; }
+
+    public required string UserId { get; set; }
+
+    public required virtual User User { get; set; }
+
+    public required Guid PostId { get; set; }
+
+    public required virtual IPost Post { get; set; }
 }

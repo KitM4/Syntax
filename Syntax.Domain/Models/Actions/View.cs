@@ -1,12 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Syntax.Domain.Models.Posts;
 
-namespace Syntax.Domain.Models.Actions
+namespace Syntax.Domain.Models.Actions;
+
+public class View
 {
-    internal class View
-    {
-    }
+    public required Guid Id { get; set; }
+
+    public required string UserId { get; set; }
+
+    public required virtual User User { get; set; }
+
+    public required Guid SnippetId { get; set; }
+
+    public required virtual Snippet Snippet { get; set; }
 }
