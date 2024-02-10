@@ -1,6 +1,9 @@
-﻿namespace Syntax.Domain.Models.Posts;
+﻿using Syntax.Domain.Models.Actions;
+using Syntax.Domain.Models.Interfaces;
 
-public class Snippet
+namespace Syntax.Domain.Models.Posts;
+
+public class Snippet : IPost
 {
     public required Guid Id { get; set; }
 
@@ -20,5 +23,9 @@ public class Snippet
 
     public required virtual User Author { get; set; }
 
-    //TODO: add collections
+    public required virtual ICollection<Like> Likes { get; set; }
+
+    public required virtual ICollection<View> Views { get; set; }
+
+    public required virtual ICollection<Comment> Comments { get; set; }
 }
