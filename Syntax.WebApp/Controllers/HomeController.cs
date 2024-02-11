@@ -1,5 +1,5 @@
 using System.Diagnostics;
-using Syntax.WebApp.Models;
+using Syntax.WebApp.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Syntax.WebApp.Controllers;

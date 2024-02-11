@@ -1,4 +1,4 @@
-namespace Syntax.WebApp.Models
+namespace Syntax.WebApp.ViewModels
 {
     public class ErrorViewModel
     {

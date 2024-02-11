@@ -1,9 +1,8 @@
 ﻿using Syntax.Domain.Models.Actions;
-using Syntax.Domain.Models.Interfaces;
 
 namespace Syntax.Domain.Models.Posts;
 
-public class Snippet : IPost
+public class Snippet
 {
     public required Guid Id { get; set; }
 
