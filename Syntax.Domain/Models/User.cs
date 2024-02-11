@@ -1,9 +1,10 @@
-﻿using Syntax.Domain.Models.Actions;
-using Syntax.Domain.Models.Posts;
+﻿using Syntax.Domain.Models.Posts;
+using Syntax.Domain.Models.Actions;
+using Microsoft.AspNetCore.Identity;
 
 namespace Syntax.Domain.Models;
 
-public class User //TODO: get from user identity
+public class User : IdentityUser
 {
     public required string Name { get; set; }
 
@@ -13,11 +14,13 @@ public class User //TODO: get from user identity
 
     public required virtual ICollection<Repost> Reposts { get; set; }
 
+    public required virtual ICollection<Comment> Comments { get; set; }
+
     public required virtual ICollection<Like> Likes { get; set; }
 
     public required virtual ICollection<View> Views { get; set; }
 
     public required virtual ICollection<Follow> Followers { get; set; }
 
-    public required virtual ICollection<Follow> Subscriptions { get; set; }
+    public required virtual ICollection<Subscription> Subscriptions { get; set; }
 }

@@ -1,4 +1,4 @@
-﻿using Syntax.Domain.Models.Interfaces;
+﻿using Syntax.Domain.Models.Posts;
 
 namespace Syntax.Domain.Models.Actions;
 
@@ -10,7 +10,7 @@ public class Like
 
     public required virtual User User { get; set; }
 
-    public required Guid PostId { get; set; }
+    public required Guid SnippetId { get; set; }
 
-    public required virtual IPost Post { get; set; }
+    public required virtual Snippet Snippet { get; set; }
 }
