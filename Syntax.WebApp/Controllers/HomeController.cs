@@ -1,18 +1,21 @@
 using System.Diagnostics;
 using Syntax.WebApp.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Syntax.WebApp.Controllers;
 
 public class HomeController : Controller
 {
     [HttpGet]
+    [AllowAnonymous]
     public IActionResult Index()
     {
         return View();
     }
 
     [HttpGet]
+    [AllowAnonymous]
     public IActionResult Privacy()
     {
         return View();
