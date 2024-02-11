@@ -27,6 +27,7 @@ public class SyntaxDbContext(DbContextOptions<SyntaxDbContext> options) : Identi
     {
         base.OnModelCreating(builder);
 
-        builder.ApplyConfiguration(new UserConfigurations());
+        builder.ApplyConfiguration(new UserConfiguration());
+        builder.ApplyConfiguration(new SnippetConfiguration());
     }
 }

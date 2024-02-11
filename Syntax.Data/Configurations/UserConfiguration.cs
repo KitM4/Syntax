@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Syntax.Data.Configurations;
 
-public class UserConfigurations : IEntityTypeConfiguration<User>
+public class UserConfiguration : IEntityTypeConfiguration<User>
 {
     public void Configure(EntityTypeBuilder<User> builder)
     {
@@ -13,11 +13,12 @@ public class UserConfigurations : IEntityTypeConfiguration<User>
 
         builder
             .Property(user => user.Name)
+            .HasMaxLength(30)
             .IsRequired();
 
         builder
             .Property(user => user.Bio)
-            .HasMaxLength(255);
+            .HasMaxLength(250);
 
         builder
             .HasMany(user => user.Snippets)
