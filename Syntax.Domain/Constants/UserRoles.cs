@@ -9,6 +9,4 @@ public static class UserRoles
     public const string Partner = "partner";
 
     public const string User = "user";
-
-    public const string Anonymous = "anonymous";
 }

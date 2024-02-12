@@ -27,4 +27,6 @@ public class Snippet
     public required virtual ICollection<View> Views { get; set; }
 
     public required virtual ICollection<Comment> Comments { get; set; }
+
+    public required virtual ICollection<Repost> Reposts { get; set; }
 }

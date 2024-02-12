@@ -52,5 +52,10 @@ public class SnippetConfiguration : IEntityTypeConfiguration<Snippet>
             .HasMany(snippet => snippet.Comments)
             .WithOne(comment => comment.Snippet)
             .HasForeignKey(comment => comment.SnippetId);
+
+        builder
+            .HasMany(snippet => snippet.Reposts)
+            .WithOne(repost => repost.Snippet)
+            .HasForeignKey(repost => repost.SnippetId);
     }
 }
