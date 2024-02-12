@@ -8,6 +8,8 @@ public class User : IdentityUser
 {
     public required string Name { get; set; }
 
+    public string? ProfileImageUrl { get; set; }
+
     public string? Bio { get; set; }
 
     public required virtual ICollection<Snippet> Snippets { get; set; }

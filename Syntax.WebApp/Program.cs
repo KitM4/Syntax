@@ -20,7 +20,7 @@ builder.Services.AddIdentity<User, IdentityRole>(options =>
 WebApplication app = builder.Build();
 
 // TODO: refactoring this code
-if (args.Length > 0 && args[0] == "db-rebuild")
+if (args.Length > 0 && args[0] == "db-rbld")
     DbInitializer.RebuildDatabase(app.Services.CreateScope());
 
 if (!app.Environment.IsDevelopment())

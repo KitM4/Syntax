@@ -29,5 +29,11 @@ public class SyntaxDbContext(DbContextOptions<SyntaxDbContext> options) : Identi
 
         builder.ApplyConfiguration(new UserConfiguration());
         builder.ApplyConfiguration(new SnippetConfiguration());
+        builder.ApplyConfiguration(new RepostConfiguration());
+        builder.ApplyConfiguration(new CommentConfiguration());
+        builder.ApplyConfiguration(new ViewConfiguration());
+        builder.ApplyConfiguration(new LikeConfiguration());
+        builder.ApplyConfiguration(new FollowConfiguration());
+        builder.ApplyConfiguration(new SubscriptionConfiguration());
     }
 }
