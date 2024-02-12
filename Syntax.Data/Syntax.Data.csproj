@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Syntax.Application\Syntax.Application.csproj" />
     <ProjectReference Include="..\Syntax.Domain\Syntax.Domain.csproj" />
   </ItemGroup>
 
