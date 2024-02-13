@@ -1,4 +1,5 @@
-﻿using Syntax.Domain.Models.Actions;
+﻿using Syntax.Domain.Enums;
+using Syntax.Domain.Models.Actions;
 
 namespace Syntax.Domain.Models.Posts;
 
@@ -12,7 +13,7 @@ public class Snippet
 
     public required string Content { get; set; }
 
-    public required string Language { get; set; } //TODO: replase on enum
+    public required ProgrammingLanguage Language { get; set; }
 
     public required DateTime CreatedAt { get; set; }
 
