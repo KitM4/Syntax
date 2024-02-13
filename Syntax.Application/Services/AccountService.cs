@@ -12,9 +12,35 @@ public class AccountService(SignInManager<User> signInManager, UserManager<User>
     public async Task<bool> LoginAsync(string userName, string password, bool rememberMe) =>
         (await _signInManager.PasswordSignInAsync(userName, password, rememberMe, false)).Succeeded;
 
-    public Task RegisterAsync(string userName, string email, string password)
+    public async Task RegisterAsync(string userName, string email, string password)
     {
-        throw new NotImplementedException();
+        User user = new()
+        {
+            UserName = userName,
+            Email = email,
+            ProfileImageUrl = string.Empty,
+            Bio = string.Empty,
+            Snippets = [],
+            Reposts = [],
+            Comments = [],
+            Likes = [],
+            Views = [],
+            Followers = [],
+            Subscriptions = [],
+        };
+
+        IdentityResult result = await _userManager.CreateAsync(user, password);
+
+        if (!result.Succeeded)
+        {
+            string errorMessage = string.Empty;
+            foreach (IdentityError error in result.Errors)
+                errorMessage += string.Join(", ", error.Description);
+
+            throw new(errorMessage);
+        }
+
+        await _signInManager.SignInAsync(user, false);
     }
 
     public Task EditAsync(string userName, string profileImageUrl, string bio)
