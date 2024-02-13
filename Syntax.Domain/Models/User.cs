@@ -6,8 +6,6 @@ namespace Syntax.Domain.Models;
 
 public class User : IdentityUser
 {
-    public required string Name { get; set; }
-
     public string? ProfileImageUrl { get; set; }
 
     public string? Bio { get; set; }

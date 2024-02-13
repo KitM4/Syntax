@@ -1,5 +1,7 @@
 using Syntax.Domain.Models;
 using Syntax.Data.Database;
+using Syntax.Application.Services;
+using Syntax.Application.Interfaces.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 
@@ -17,10 +19,13 @@ builder.Services.AddIdentity<User, IdentityRole>(options =>
     })
     .AddEntityFrameworkStores<SyntaxDbContext>().AddDefaultTokenProviders();
 
+//builder.Services.AddScoped<IRepository<User>, UserRepository>();
+builder.Services.AddScoped<IAccountService, AccountService>();
+
 WebApplication app = builder.Build();
 
 // TODO: refactoring this code
-if (args.Length > 0 && args[0] == "db-rbld")
+if (args.Length > 0 && args[0] == "db-rebuild")
     DbInitializer.RebuildDatabase(app.Services.CreateScope());
 
 if (!app.Environment.IsDevelopment())
