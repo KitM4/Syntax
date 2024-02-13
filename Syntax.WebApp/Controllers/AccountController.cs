@@ -1,14 +1,12 @@
-﻿using Syntax.Data.Repositories;
-using Syntax.WebApp.ViewModels.User;
+﻿using Syntax.WebApp.ViewModels.User;
 using Syntax.Application.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 
 namespace Syntax.WebApp.Controllers;
 
-public class AccountController(UserRepository repository, IAccountService accountService) : Controller
+public class AccountController(IAccountService accountService) : Controller
 {
-    private readonly UserRepository _repository = repository;
     private readonly IAccountService _accountService = accountService;
 
     [HttpGet]
@@ -58,5 +56,13 @@ public class AccountController(UserRepository repository, IAccountService accoun
             ViewBag.ErrorMessage = exception.Message;
             return View(registeredUser);
         }
+    }
+
+    [HttpGet]
+    [Authorize]
+    public async Task<IActionResult> Logout()
+    {
+        await _accountService.LogoutAsync();
+        return RedirectToAction("Index", "Home");
     }
 }

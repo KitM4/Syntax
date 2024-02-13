@@ -43,12 +43,10 @@ public class AccountService(SignInManager<User> signInManager, UserManager<User>
         await _signInManager.SignInAsync(user, false);
     }
 
+    public async Task LogoutAsync() =>
+        await _signInManager.SignOutAsync();
+    
     public Task EditAsync(string userName, string profileImageUrl, string bio)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task LogoutAsync()
     {
         throw new NotImplementedException();
     }

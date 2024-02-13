@@ -13,7 +13,7 @@ public class HomeController : Controller
         View();
 
     [HttpGet]
-    [AllowAnonymous]
+    [Authorize]
     public IActionResult Privacy() =>
         View();
 

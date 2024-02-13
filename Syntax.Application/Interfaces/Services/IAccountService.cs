@@ -6,7 +6,7 @@ public interface IAccountService
 
     public Task RegisterAsync(string userName, string email, string password);
 
-    public Task EditAsync(string userName, string profileImageUrl, string bio);
-
     public Task LogoutAsync();
+
+    public Task EditAsync(string userName, string profileImageUrl, string bio);
 }
