@@ -1,5 +1,8 @@
 using Syntax.Domain.Models;
 using Syntax.Data.Database;
+using Syntax.Data.Repositories;
+using Syntax.Application.Services;
+using Syntax.Application.Interfaces.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 
@@ -16,6 +19,9 @@ builder.Services.AddIdentity<User, IdentityRole>(options =>
         options.Password.RequireNonAlphanumeric = true;
     })
     .AddEntityFrameworkStores<SyntaxDbContext>().AddDefaultTokenProviders();
+
+builder.Services.AddScoped<UserRepository>();
+builder.Services.AddScoped<IAccountService, AccountService>();
 
 WebApplication app = builder.Build();
 

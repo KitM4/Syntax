@@ -2,7 +2,7 @@
 
 public interface IAccountService
 {
-    public Task LoginAsync(string email, string password);
+    public Task<bool> LoginAsync(string userName, string password, bool rememberMe);
 
     public Task RegisterAsync(string userName, string email, string password);
 
