@@ -1,0 +1,35 @@
+﻿@using Syntax.WebApp.ViewModels.User
+@model UserProfileViewModel
+
+<div class="container">
+    <div class="row">
+
+        <div class="col-md-4">
+            <img src="@Model.ProfileImageUrl" alt="User Photo" class="img-fluid rounded-circle">
+        </div>
+        <div class="col-md-8">
+
+            <h2>@Model.UserName</h2>
+
+            <p>@Model.Bio</p>
+
+            <p>Snippets: @Model.SnippetsCount</p>
+            <p>Followers: @Model.FollowersCount</p>
+            <p>Subscriptions: @Model.SubscriptionsCount</p>
+        </div>
+    </div>
+
+    <h3>Snippets</h3>
+    @foreach (var snippet in Model.Snippets)
+    {
+        <div class="card">
+            <div class="card-header">
+                <h5>@snippet.Title</h5>
+            </div>
+            <div class="card-body">
+                <p>@snippet.Content</p>
+                <!-- Add more details -->
+            </div>
+        </div>
+    }
+</div>
