@@ -1,13 +1,17 @@
-﻿using Syntax.WebApp.ViewModels.User;
+﻿using Syntax.Domain.Models;
+using System.Security.Claims;
+using Syntax.Data.Repositories;
+using Syntax.WebApp.ViewModels.User;
 using Syntax.Application.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 
 namespace Syntax.WebApp.Controllers;
 
-public class AccountController(IAccountService accountService) : Controller
+public class AccountController(IAccountService accountService, UserRepository repository) : Controller
 {
     private readonly IAccountService _accountService = accountService;
+    private readonly UserRepository _repository = repository;
 
     [HttpGet]
     [AllowAnonymous]
@@ -56,6 +60,32 @@ public class AccountController(IAccountService accountService) : Controller
             ViewBag.ErrorMessage = exception.Message;
             return View(registeredUser);
         }
+    }
+
+    [HttpGet]
+    [Authorize]
+    public async Task<IActionResult> Profile()
+    {
+        string? userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        if (userId == null)
+            return BadRequest();
+
+        User? user = await _repository.GetByIdAsync(userId);
+        if (user == null)
+            return BadRequest();
+
+        UserProfileViewModel userProfile = new()
+        {
+            UserName = user.UserName!,
+            ProfileImageUrl = user.ProfileImageUrl,
+            Bio = user.Bio,
+            SnippetsCount = user.Snippets.Count,
+            FollowersCount = user.Followers.Count,
+            SubscriptionsCount = user.Subscriptions.Count,
+            Snippets = user.Snippets,
+        };
+
+        return View(userProfile);
     }
 
     [HttpGet]

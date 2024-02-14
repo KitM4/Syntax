@@ -4,6 +4,7 @@ using Syntax.Application.Services;
 using Syntax.Application.Interfaces.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using Syntax.Data.Repositories;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +21,7 @@ builder.Services.AddIdentity<User, IdentityRole>(options =>
     .AddEntityFrameworkStores<SyntaxDbContext>().AddDefaultTokenProviders();
 
 //builder.Services.AddScoped<IRepository<User>, UserRepository>();
+builder.Services.AddScoped<UserRepository>();
 builder.Services.AddScoped<IAccountService, AccountService>();
 
 WebApplication app = builder.Build();
