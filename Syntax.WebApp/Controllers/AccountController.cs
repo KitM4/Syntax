@@ -17,7 +17,7 @@ public class AccountController(IAccountService accountService, UserRepository re
     [AllowAnonymous]
     public IActionResult Login() =>
         View(new LoginUserViewModel());
-
+    
     [HttpPost]
     [AllowAnonymous]
     public async Task<IActionResult> Login(LoginUserViewModel loginedUser)
@@ -102,7 +102,7 @@ public class AccountController(IAccountService accountService, UserRepository re
             if (user == null)
                 return BadRequest();
 
-            await _accountService.EditAsync(user, editedUser.UserName, editedUser.ProfileImageUrl, editedUser.Bio);
+            await _accountService.EditAsync(user, editedUser.UserName, editedUser.ProfileImage, editedUser.Bio);
             return RedirectToAction("Profile", "Account");
         }
         catch (Exception exception)

@@ -1,13 +1,16 @@
-﻿using Syntax.Domain.Models;
+﻿using CloudinaryDotNet.Actions;
+using Syntax.Domain.Models;
 using Syntax.Application.Interfaces.Services;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Http;
 
 namespace Syntax.Application.Services;
 
-public class AccountService(SignInManager<User> signInManager, UserManager<User> userManager) : IAccountService
+public class AccountService(SignInManager<User> signInManager, UserManager<User> userManager, IImageUploadService imageUpload) : IAccountService
 {
     private readonly SignInManager<User> _signInManager = signInManager;
     private readonly UserManager<User> _userManager = userManager;
+    private readonly IImageUploadService _imageUpload = imageUpload;
 
     public async Task<bool> LoginAsync(string userName, string password, bool rememberMe) =>
         (await _signInManager.PasswordSignInAsync(userName, password, rememberMe, false)).Succeeded;
@@ -43,14 +46,14 @@ public class AccountService(SignInManager<User> signInManager, UserManager<User>
         await _signInManager.SignInAsync(user, false);
     }
 
-    public async Task EditAsync(User user, string userName, string? profileImageUrl, string? bio)
+    public async Task EditAsync(User user, string userName, IFormFile? profileImage, string? bio)
     {
         if (user == null) throw new("User is null");
 
-        if (!string.IsNullOrWhiteSpace(profileImageUrl))
+        if (profileImage != null)
         {
-            //TODO: implemnt photo upload
-            user.ProfileImageUrl = profileImageUrl;
+            ImageUploadResult result = await _imageUpload.UploadPhotoAsync(profileImage);
+            user.ProfileImageUrl = result.Url.ToString();
         }
 
         user.UserName = userName;
