@@ -66,11 +66,7 @@ public class AccountController(IAccountService accountService, UserRepository re
     [Authorize]
     public async Task<IActionResult> Profile()
     {
-        string? userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-        if (userId == null)
-            return BadRequest();
-
-        User? user = await _repository.GetByIdAsync(userId);
+        User? user = await _repository.GetByIdWithParameters(GetCurrentUserId(), "Snippets", "Followers", "Subscriptions");
         if (user == null)
             return BadRequest();
 
@@ -90,9 +86,40 @@ public class AccountController(IAccountService accountService, UserRepository re
 
     [HttpGet]
     [Authorize]
+    public IActionResult Edit() =>
+        View(new EditUserViewModel());
+
+    [HttpPost]
+    [Authorize]
+    public async Task<IActionResult> Edit(EditUserViewModel editedUser)
+    {
+        if (!ModelState.IsValid)
+            return View(editedUser);
+
+        try
+        {
+            User? user = await _repository.GetById(GetCurrentUserId());
+            if (user == null)
+                return BadRequest();
+
+            await _accountService.EditAsync(user, editedUser.UserName, editedUser.ProfileImageUrl, editedUser.Bio);
+            return RedirectToAction("Profile", "Account");
+        }
+        catch (Exception exception)
+        {
+            ViewBag.ErrorMessage = exception.Message;
+            return View(editedUser);
+        }
+    }
+
+    [HttpGet]
+    [Authorize]
     public async Task<IActionResult> Logout()
     {
         await _accountService.LogoutAsync();
         return RedirectToAction("Index", "Home");
     }
+
+    private string GetCurrentUserId() =>
+        User.FindFirstValue(ClaimTypes.NameIdentifier) ?? throw new("The user is not authorized");
 }

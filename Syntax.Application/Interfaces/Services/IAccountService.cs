@@ -1,4 +1,6 @@
-﻿namespace Syntax.Application.Interfaces.Services;
+﻿using Syntax.Domain.Models;
+
+namespace Syntax.Application.Interfaces.Services;
 
 public interface IAccountService
 {
@@ -6,7 +8,7 @@ public interface IAccountService
 
     public Task RegisterAsync(string userName, string email, string password);
 
-    public Task LogoutAsync();
+    public Task EditAsync(User user, string userName, string? profileImageUrl, string? bio);
 
-    public Task EditAsync(string userName, string profileImageUrl, string bio);
+    public Task LogoutAsync();
 }
