@@ -9,5 +9,5 @@ public class EditUserViewModel
 
     public string? Bio { get; set; }
 
-    public string? ProfileImageUrl { get; set; }
+    public IFormFile? ProfileImage { get; set; }
 }

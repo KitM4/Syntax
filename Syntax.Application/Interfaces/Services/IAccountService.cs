@@ -1,4 +1,5 @@
-﻿using Syntax.Domain.Models;
+﻿using Microsoft.AspNetCore.Http;
+using Syntax.Domain.Models;
 
 namespace Syntax.Application.Interfaces.Services;
 
@@ -8,7 +9,7 @@ public interface IAccountService
 
     public Task RegisterAsync(string userName, string email, string password);
 
-    public Task EditAsync(User user, string userName, string? profileImageUrl, string? bio);
+    public Task EditAsync(User user, string userName, IFormFile? profileImage, string? bio);
 
     public Task LogoutAsync();
 }

@@ -5,6 +5,7 @@ using Syntax.Application.Services;
 using Syntax.Application.Interfaces.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using Syntax.Application.Utils.Cloudinary;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -20,9 +21,12 @@ builder.Services.AddIdentity<User, IdentityRole>(options =>
     })
     .AddEntityFrameworkStores<SyntaxDbContext>().AddDefaultTokenProviders();
 
-//builder.Services.AddScoped<IRepository<User>, UserRepository>();
+
 builder.Services.AddScoped<UserRepository>();
+builder.Services.AddScoped<IImageUploadService, ImageUploadService>();
 builder.Services.AddScoped<IAccountService, AccountService>();
+
+builder.Services.Configure<CloudinarySettings>(builder.Configuration.GetSection("CloudinarySettings"));
 
 WebApplication app = builder.Build();
 
