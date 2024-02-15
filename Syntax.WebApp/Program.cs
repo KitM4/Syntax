@@ -1,10 +1,10 @@
 using Syntax.Domain.Models;
 using Syntax.Data.Database;
+using Syntax.Data.Repositories;
 using Syntax.Application.Services;
 using Syntax.Application.Interfaces.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
-using Syntax.Data.Repositories;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 

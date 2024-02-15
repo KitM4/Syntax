@@ -43,11 +43,22 @@ public class AccountService(SignInManager<User> signInManager, UserManager<User>
         await _signInManager.SignInAsync(user, false);
     }
 
+    public async Task EditAsync(User user, string userName, string? profileImageUrl, string? bio)
+    {
+        if (user == null) throw new("User is null");
+
+        if (!string.IsNullOrWhiteSpace(profileImageUrl))
+        {
+            //TODO: implemnt photo upload
+            user.ProfileImageUrl = profileImageUrl;
+        }
+
+        user.UserName = userName;
+        user.Bio = bio;
+
+        await _userManager.UpdateAsync(user);
+    }
+
     public async Task LogoutAsync() =>
         await _signInManager.SignOutAsync();
-    
-    public Task EditAsync(string userName, string profileImageUrl, string bio)
-    {
-        throw new NotImplementedException();
-    }
 }
