@@ -1,6 +1,4 @@
-﻿using Syntax.Domain.Models.Posts;
-
-namespace Syntax.WebApp.ViewModels.User;
+﻿namespace Syntax.WebApp.ViewModels.User;
 
 public class UserProfileViewModel
 {
@@ -16,5 +14,5 @@ public class UserProfileViewModel
 
     public int SubscriptionsCount { get; set; } = 0;
 
-    public ICollection<Snippet> Snippets { get; set; } = [];
+    public ICollection<Domain.Models.Posts.Snippet> Snippets { get; set; } = [];
 }

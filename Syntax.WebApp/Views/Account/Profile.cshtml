@@ -22,6 +22,12 @@
         </div>
     </div>
 
+    <div class="row mt-3">
+        <div class="col-md-12">
+            <a asp-controller="Snippet" asp-action="Create" class="btn btn-success">New Snippet</a>
+        </div>
+    </div>
+
     <h3>Snippets</h3>
     @foreach (var snippet in Model.Snippets)
     {
