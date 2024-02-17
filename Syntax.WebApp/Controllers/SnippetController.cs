@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Syntax.WebApp.ViewModels.Snippet;
 using Microsoft.AspNetCore.Mvc;
-using Syntax.WebApp.ViewModels.Snippet;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Syntax.WebApp.Controllers;
 
